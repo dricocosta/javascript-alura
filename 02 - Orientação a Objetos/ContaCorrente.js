@@ -1,9 +1,27 @@
+import {Cliente} from "./Cliente.js";
 export class ContaCorrente{
+    static numeroDeContas = 0;
     agencia;
-    cliente;
-
-    // underline indica que o atributo "valor" é privado e não deve ser alterado
+    _cliente; // underline indica que o atributo "cliente" é privado e não deve ser alterado
     _saldo = 0;
+
+    // assessores: get e set
+    set cliente(novoValor){
+        if(novoValor instanceof Cliente){
+            this._cliente = novoValor;
+        } 
+    }
+
+    get cliente(){
+        return this.cliente;
+    }
+
+    constructor(agencia, cliente){
+        this.agencia = agencia;
+        this.cliente = cliente;
+        ContaCorrente.numeroDeContas += 1;
+    }
+
 
     //Método para sacar
     sacar(valor){
@@ -25,3 +43,4 @@ export class ContaCorrente{
         conta.depositar(valorSacado);
         
     }
+}
